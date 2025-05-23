@@ -18,3 +18,10 @@ def extract_audio_from_video(video_path: str, output_path: str = None, audio_for
         FileNotFoundError: If the input video file doesn't exist
         ffmpeg.Error: If there's an error during audio extraction
     """
+
+    if not os.path.exists(video_path):
+        raise FileNotFoundError(f"Video file not found: {video_path}")
+    
+    # If output path is not provided, create one based on input video path
+    if output_path is None:
+        output_path = os.path.splitext(video_path)[0] + f'.{audio_format}'
