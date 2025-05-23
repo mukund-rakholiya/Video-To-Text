@@ -8,7 +8,8 @@ def extract_audio_from_video(video_path: str, output_path: str = None, audio_for
     Args:
         video_path (str): Path to the input video file
         output_path (str, optional): Path where the audio file should be saved. 
-                                    If not provided, will use the same name as video with different extension
+                                    If not provided, will use the same name as video
+                                    with different extension
         audio_format (str, optional): Format of the output audio file. Defaults to 'mp3'
     
     Returns:
