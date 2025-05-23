@@ -19,7 +19,7 @@ def extract_audio_from_video(video_path: str, output_path: str = None, audio_for
         FileNotFoundError: If the input video file doesn't exist
         ffmpeg.Error: If there's an error during audio extraction
     """
-    
+
     if not os.path.exists(video_path):
         raise FileNotFoundError(f"Video file not found: {video_path}")
     
@@ -38,7 +38,7 @@ def extract_audio_from_video(video_path: str, output_path: str = None, audio_for
         ffmpeg.run(stream, overwrite_output=True, capture_stdout=True, capture_stderr=True)
         
         return output_path
-    
+        
     except ffmpeg.Error as e:
         # Clean up the output file if it was created
         if os.path.exists(output_path):
