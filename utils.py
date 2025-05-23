@@ -25,3 +25,22 @@ def extract_audio_from_video(video_path: str, output_path: str = None, audio_for
     # If output path is not provided, create one based on input video path
     if output_path is None:
         output_path = os.path.splitext(video_path)[0] + f'.{audio_format}'
+
+    try:
+        # Create an ffmpeg stream
+        stream = ffmpeg.input(video_path)
+        
+        # Extract audio and save it
+        stream = ffmpeg.output(stream, output_path, acodec='libmp3lame' if audio_format == 'mp3' else 'pcm_s16le')
+        
+        # Overwrite if file exists and run the ffmpeg command
+        ffmpeg.run(stream, overwrite_output=True, capture_stdout=True, capture_stderr=True)
+        
+        return output_path
+        
+    except ffmpeg.Error as e:
+        # Clean up the output file if it was created
+        if os.path.exists(output_path):
+            os.remove(output_path)
+        error_message = e.stderr.decode() if e.stderr else str(e)
+        raise ffmpeg.Error(f"Error extracting audio: {error_message}")
