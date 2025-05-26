@@ -28,33 +28,37 @@ def transcribe_audio(
             - language: Detected or specified language
     """
 
-    # Convert string path to Path object if necessary
-    audio_path = Path(audio_path) if isinstance(audio_path, str) else audio_path
-    
-    # Validate audio file exists
-    if not audio_path.exists():
-        raise FileNotFoundError(f"Audio file not found: {audio_path}")
+    try:
+        # Convert string path to Path object if necessary
+        audio_path = Path(audio_path) if isinstance(audio_path, str) else audio_path
         
-    # Load the Whisper model
-    if verbose:
-        print(f"Loading Whisper model: {model_name}")
-    model = whisper.load_model(model_name)
-    
-    # Prepare transcription options
-    options = {
-        "task": task,
-        "verbose": verbose
-    }
-    if language:
-        options["language"] = language
+        # Validate audio file exists
+        if not audio_path.exists():
+            raise FileNotFoundError(f"Audio file not found: {audio_path}")
+            
+        # Load the Whisper model
+        if verbose:
+            print(f"Loading Whisper model: {model_name}")
+        model = whisper.load_model(model_name)
         
-    # Perform transcription
-    if verbose:
-        print("Starting transcription...")
-    result = model.transcribe(str(audio_path), **options)
-    
-    return {
-        "text": result["text"],
-        "segments": result["segments"],
-        "language": result["language"]
-    }
+        # Prepare transcription options
+        options = {
+            "task": task,
+            "verbose": verbose
+        }
+        if language:
+            options["language"] = language
+            
+        # Perform transcription
+        if verbose:
+            print("Starting transcription...")
+        result = model.transcribe(str(audio_path), **options)
+        
+        return {
+            "text": result["text"],
+            "segments": result["segments"],
+            "language": result["language"]
+        }
+        
+    except Exception as e:
+        raise Exception(f"Transcription failed: {str(e)}")
