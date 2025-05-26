@@ -94,50 +94,54 @@ async def transcribe_audio_deepgram(
             - speakers: Speaker diarization (if enabled)
     """
 
-    # Convert string path to Path object if necessary
-    audio_path = Path(audio_path) if isinstance(audio_path, str) else audio_path
-    
-    # Validate audio file exists
-    if not audio_path.exists():
-        raise FileNotFoundError(f"Audio file not found: {audio_path}")
-    
-    # Initialize Deepgram client
-    deepgram = Deepgram(api_key)
-    
-    # Prepare audio file
-    with open(str(audio_path), 'rb') as audio:
-        source = {'buffer': audio, 'mimetype': 'audio/wav'}
+    try:
+        # Convert string path to Path object if necessary
+        audio_path = Path(audio_path) if isinstance(audio_path, str) else audio_path
         
-        # Configure transcription options
-        options = {
-            'smart_format': smart_format,
-            'model': model,
-            'language': language,
-            'tier': tier,
-            'punctuate': punctuate
-        }
+        # Validate audio file exists
+        if not audio_path.exists():
+            raise FileNotFoundError(f"Audio file not found: {audio_path}")
         
-        if diarize:
-            options['diarize'] = True
+        # Initialize Deepgram client
+        deepgram = Deepgram(api_key)
         
-        # Perform transcription
-        response = await deepgram.transcription.prerecorded(source, options)
-        
-        # Extract results
-        result = response['results']
-        channels = result['channels'][0]  # Get first channel
-        alternatives = channels['alternatives'][0]  # Get first alternative
-        
-        # Prepare return dictionary
-        transcription_result = {
-            'text': alternatives.get('transcript', ''),
-            'confidence': alternatives.get('confidence', 0),
-            'words': alternatives.get('words', []),
-            'language': result.get('language', language)
-        }
-        
-        # Add speaker diarization if enabled
-        if diarize and 'speaker_labels' in alternatives:
-            transcription_result['speakers'] = alternatives['speaker_labels']
-        
-        return transcription_result
+        # Prepare audio file
+        with open(str(audio_path), 'rb') as audio:
+            source = {'buffer': audio, 'mimetype': 'audio/wav'}
+            
+            # Configure transcription options
+            options = {
+                'smart_format': smart_format,
+                'model': model,
+                'language': language,
+                'tier': tier,
+                'punctuate': punctuate
+            }
+            
+            if diarize:
+                options['diarize'] = True
+            
+            # Perform transcription
+            response = await deepgram.transcription.prerecorded(source, options)
+            
+            # Extract results
+            result = response['results']
+            channels = result['channels'][0]  # Get first channel
+            alternatives = channels['alternatives'][0]  # Get first alternative
+            
+            # Prepare return dictionary
+            transcription_result = {
+                'text': alternatives.get('transcript', ''),
+                'confidence': alternatives.get('confidence', 0),
+                'words': alternatives.get('words', []),
+                'language': result.get('language', language)
+            }
+            
+            # Add speaker diarization if enabled
+            if diarize and 'speaker_labels' in alternatives:
+                transcription_result['speakers'] = alternatives['speaker_labels']
+            
+            return transcription_result
+            
+    except Exception as e:
+        raise Exception(f"Deepgram transcription failed: {str(e)}")
