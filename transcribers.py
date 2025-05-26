@@ -11,6 +11,7 @@ def transcribe_audio(
     task: str = "transcribe",
     verbose: bool = False
 ) -> Dict:
+    
     """
     Transcribe audio using OpenAI's Whisper model.
     
@@ -73,6 +74,7 @@ async def transcribe_audio_deepgram(
     diarize: bool = False,
     punctuate: bool = True
 ) -> Dict:
+    
     """
     Transcribe audio using Deepgram's API with async support.
     
