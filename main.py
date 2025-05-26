@@ -6,3 +6,6 @@ from transcribers import transcribe_audio
 from utils import extract_audio_from_video
 import os
 from dotenv.main import load_dotenv
+
+# Load environment variables
+load_dotenv()
