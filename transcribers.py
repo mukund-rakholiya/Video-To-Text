@@ -1,7 +1,7 @@
 import whisper
 from typing import Dict, Optional, Union
 from pathlib import Path
-import asyncio
+# import asyncio
 from deepgram import Deepgram
 
 def transcribe_audio(
