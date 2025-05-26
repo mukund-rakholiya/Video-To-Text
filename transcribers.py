@@ -62,3 +62,34 @@ def transcribe_audio(
         
     except Exception as e:
         raise Exception(f"Transcription failed: {str(e)}")
+
+async def transcribe_audio_deepgram(
+    audio_path: Union[str, Path],
+    api_key: str,
+    language: str = "en",
+    model: str = "general",
+    tier: str = "enhanced",
+    smart_format: bool = True,
+    diarize: bool = False,
+    punctuate: bool = True
+) -> Dict:
+    """
+    Transcribe audio using Deepgram's API with async support.
+    
+    Args:
+        audio_path (Union[str, Path]): Path to the audio file
+        api_key (str): Deepgram API key
+        language (str): Language code (e.g., 'en' for English)
+        model (str): Model to use (e.g., 'general', 'meeting', 'phonecall')
+        tier (str): Processing tier ('enhanced' or 'base')
+        smart_format (bool): Whether to enable smart formatting
+        diarize (bool): Whether to enable speaker diarization
+        punctuate (bool): Whether to add punctuation
+        
+    Returns:
+        Dict: Dictionary containing transcription results including:
+            - text: Full transcription text
+            - words: List of words with timestamps
+            - confidence: Overall confidence score
+            - speakers: Speaker diarization (if enabled)
+    """
