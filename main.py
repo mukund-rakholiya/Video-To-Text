@@ -52,3 +52,8 @@ async def process_video(
         model_name=whisper_model,
         verbose=True
     )
+
+    # Save transcriptions to files
+    whisper_output = output_path / f"{video_name}_whisper.txt"
+    with open(whisper_output, 'w', encoding='utf-8') as f:
+        f.write(whisper_result['text'])
