@@ -10,3 +10,23 @@ from dotenv.main import load_dotenv
 # Load environment variables
 load_dotenv()
 
+async def process_video(
+    video_path: str,
+    deepgram_api_key: str = None,  # DEEPGRAM: Kept for future use
+    whisper_model: str = "base",
+    output_dir: str = "transcriptions",
+    audio_format: str = "wav"
+) -> dict:
+    """
+    Process a video file by extracting audio and transcribing with Whisper.
+    
+    Args:
+        video_path (str): Path to the video file
+        deepgram_api_key (str): Deepgram API key (optional if set in .env) # DEEPGRAM: Kept for documentation
+        whisper_model (str): Whisper model to use
+        output_dir (str): Directory to save transcriptions
+        audio_format (str): Format for extracted audio (wav or mp3)
+        
+    Returns:
+        dict: Dictionary containing transcriptions
+    """
