@@ -30,3 +30,7 @@ async def process_video(
     Returns:
         dict: Dictionary containing transcriptions
     """
+        # Create output directory if it doesn't exist
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    
