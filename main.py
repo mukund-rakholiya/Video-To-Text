@@ -45,3 +45,10 @@ async def process_video(
     )
     
     print("Starting transcription process...")
+
+    # Run Whisper transcription
+    whisper_result = transcribe_audio(
+        extracted_audio,
+        model_name=whisper_model,
+        verbose=True
+    )
