@@ -30,7 +30,7 @@ async def process_video(
     Returns:
         dict: Dictionary containing transcriptions
     """
-    
+
     try:
         # DEEPGRAM: Commenting out API key validation
         # api_key = deepgram_api_key or os.getenv("DEEPGRAM_API_KEY")
@@ -107,3 +107,8 @@ async def process_video(
         except:
             pass
         raise Exception(f"Video processing failed: {str(e)}")
+
+async def main():
+    """
+    Example usage of the video processing pipeline.
+    """
