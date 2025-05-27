@@ -30,46 +30,80 @@ async def process_video(
     Returns:
         dict: Dictionary containing transcriptions
     """
-    # Create output directory if it doesn't exist
-    output_path = Path(output_dir)
-    output_path.mkdir(parents=True, exist_ok=True)
     
-    # Extract audio from video using ffmpeg
-    print("Extracting audio from video...")
-    video_name = Path(video_path).stem
-    audio_path = str(output_path / f"{video_name}.{audio_format}")
-    extracted_audio = extract_audio_from_video(
-        video_path=video_path,
-        output_path=audio_path,
-        audio_format=audio_format
-    )
-    
-    print("Starting transcription process...")
+    try:
+        # DEEPGRAM: Commenting out API key validation
+        # api_key = deepgram_api_key or os.getenv("DEEPGRAM_API_KEY")
+        # if not api_key:
+        #     raise ValueError("Deepgram API key not found in parameters or environment variables")
 
-    # Run Whisper transcription
-    whisper_result = transcribe_audio(
-        extracted_audio,
-        model_name=whisper_model,
-        verbose=True
-    )
-
-    # Save transcriptions to files
-    whisper_output = output_path / f"{video_name}_whisper.txt"
-    with open(whisper_output, 'w', encoding='utf-8') as f:
-        f.write(whisper_result['text'])
-
-    # Clean up extracted audio if it's not in the output directory
-    if not str(extracted_audio).startswith(str(output_path)):
-        os.unlink(extracted_audio)
-
-    return {
-        'whisper': whisper_result,
-        # DEEPGRAM: Commenting out Deepgram result
-        # 'deepgram': deepgram_result,
-        'output_files': {
-            'audio': str(extracted_audio),
-            'whisper': str(whisper_output),
-            # DEEPGRAM: Commenting out Deepgram output
-            # 'deepgram': str(deepgram_output)
+        # Create output directory if it doesn't exist
+        output_path = Path(output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+        
+        # Extract audio from video using ffmpeg
+        print("Extracting audio from video...")
+        video_name = Path(video_path).stem
+        audio_path = str(output_path / f"{video_name}.{audio_format}")
+        extracted_audio = extract_audio_from_video(
+            video_path=video_path,
+            output_path=audio_path,
+            audio_format=audio_format
+        )
+        
+        print("Starting transcription process...")
+        
+        # Run Whisper transcription
+        whisper_result = transcribe_audio(
+            extracted_audio,
+            model_name=whisper_model,
+            verbose=True
+        )
+        
+        # DEEPGRAM: Commenting out Deepgram transcription
+        # deepgram_result = await transcribe_audio_deepgram(
+        #     extracted_audio,
+        #     api_key=api_key,
+        #     smart_format=True,
+        #     diarize=True
+        # )
+        
+        # Save transcriptions to files
+        whisper_output = output_path / f"{video_name}_whisper.txt"
+        with open(whisper_output, 'w', encoding='utf-8') as f:
+            f.write(whisper_result['text'])
+            
+        # DEEPGRAM: Commenting out Deepgram file saving
+        # deepgram_output = output_path / f"{video_name}_deepgram.txt"
+        # with open(deepgram_output, 'w', encoding='utf-8') as f:
+        #     f.write(deepgram_result['text'])
+            
+        # Clean up extracted audio if it's not in the output directory
+        if not str(extracted_audio).startswith(str(output_path)):
+            os.unlink(extracted_audio)
+            
+        return {
+            'whisper': whisper_result,
+            # DEEPGRAM: Commenting out Deepgram result
+            # 'deepgram': deepgram_result,
+            'output_files': {
+                'audio': str(extracted_audio),
+                'whisper': str(whisper_output),
+                # DEEPGRAM: Commenting out Deepgram output
+                # 'deepgram': str(deepgram_output)
+            }
         }
-    }
+        
+    except Exception as e:
+        # Clean up any generated files in case of error
+        try:
+            if 'extracted_audio' in locals():
+                os.unlink(extracted_audio)
+            if 'whisper_output' in locals() and whisper_output.exists():
+                os.unlink(whisper_output)
+            # DEEPGRAM: Commenting out Deepgram cleanup
+            # if 'deepgram_output' in locals() and deepgram_output.exists():
+            #     os.unlink(deepgram_output)
+        except:
+            pass
+        raise Exception(f"Video processing failed: {str(e)}")
