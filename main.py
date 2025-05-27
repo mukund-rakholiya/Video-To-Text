@@ -57,3 +57,7 @@ async def process_video(
     whisper_output = output_path / f"{video_name}_whisper.txt"
     with open(whisper_output, 'w', encoding='utf-8') as f:
         f.write(whisper_result['text'])
+
+    # Clean up extracted audio if it's not in the output directory
+    if not str(extracted_audio).startswith(str(output_path)):
+        os.unlink(extracted_audio)
