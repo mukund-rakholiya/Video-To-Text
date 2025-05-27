@@ -61,3 +61,15 @@ async def process_video(
     # Clean up extracted audio if it's not in the output directory
     if not str(extracted_audio).startswith(str(output_path)):
         os.unlink(extracted_audio)
+
+    return {
+        'whisper': whisper_result,
+        # DEEPGRAM: Commenting out Deepgram result
+        # 'deepgram': deepgram_result,
+        'output_files': {
+            'audio': str(extracted_audio),
+            'whisper': str(whisper_output),
+            # DEEPGRAM: Commenting out Deepgram output
+            # 'deepgram': str(deepgram_output)
+        }
+    }
