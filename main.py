@@ -34,3 +34,14 @@ async def process_video(
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
     
+    # Extract audio from video using ffmpeg
+    print("Extracting audio from video...")
+    video_name = Path(video_path).stem
+    audio_path = str(output_path / f"{video_name}.{audio_format}")
+    extracted_audio = extract_audio_from_video(
+        video_path=video_path,
+        output_path=audio_path,
+        audio_format=audio_format
+    )
+    
+    print("Starting transcription process...")
