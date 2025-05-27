@@ -112,3 +112,14 @@ async def main():
     """
     Example usage of the video processing pipeline.
     """
+
+    result = await process_video(
+        video_path=video_path,
+        whisper_model="base",
+        output_dir="transcriptions",
+        audio_format="wav"  # wav format is preferred for transcription
+    )
+    
+    print("\nTranscription completed successfully!")
+    print(f"Audio file: {result['output_files']['audio']}")
+    print(f"Whisper transcription: {result['output_files']['whisper']}")
