@@ -18,6 +18,10 @@ CONFIG = {
 
 async def run_transcription():
     try:
+        # DEEPGRAM: Commenting out API key validation
+        # if not CONFIG["deepgram_api_key"]:
+        #     raise ValueError("DEEPGRAM_API_KEY not found in .env file")
+            
         # Ensure video file exists
         if not os.path.exists(CONFIG["video_path"]):
             raise FileNotFoundError(f"Video file not found: {CONFIG['video_path']}")
@@ -27,6 +31,8 @@ async def run_transcription():
         
         result = await process_video(
             video_path=CONFIG["video_path"],
+            # DEEPGRAM: Commenting out API key
+            # deepgram_api_key=CONFIG["deepgram_api_key"],
             whisper_model=CONFIG["whisper_model"],
             output_dir=CONFIG["output_dir"],
             audio_format=CONFIG["audio_format"]
@@ -36,10 +42,16 @@ async def run_transcription():
         print("\nOutput files:")
         print(f"- Audio: {result['output_files']['audio']}")
         print(f"- Whisper transcription: {result['output_files']['whisper']}")
+        # DEEPGRAM: Commenting out Deepgram output
+        # print(f"- Deepgram transcription: {result['output_files']['deepgram']}")
         
         # Print sample of transcriptions
         print("\nWhisper Transcription (first 100 characters):")
         print(result['whisper']['text'][:100] + "...")
+        
+        # DEEPGRAM: Commenting out Deepgram sample
+        # print("\nDeepgram Transcription (first 100 characters):")
+        # print(result['deepgram']['text'][:100] + "...")
         
     except Exception as e:
         print(f"Error: {str(e)}")
