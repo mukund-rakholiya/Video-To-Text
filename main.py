@@ -30,7 +30,6 @@ async def process_video(
     Returns:
         dict: Dictionary containing transcriptions
     """
-
     try:
         # DEEPGRAM: Commenting out API key validation
         # api_key = deepgram_api_key or os.getenv("DEEPGRAM_API_KEY")
@@ -112,7 +111,9 @@ async def main():
     """
     Example usage of the video processing pipeline.
     """
-
+    # Configuration
+    video_path = "path/to/your/video.mp4"
+    
     try:
         result = await process_video(
             video_path=video_path,
@@ -129,6 +130,6 @@ async def main():
         
     except Exception as e:
         print(f"Error: {str(e)}")
-
+        
 if __name__ == "__main__":
     asyncio.run(main())
