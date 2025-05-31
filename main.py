@@ -88,8 +88,8 @@ async def process_video(
             'output_files': {
                 'audio': str(extracted_audio),
                 'whisper': str(whisper_output),
-                # DEEPGRAM: Commenting out Deepgram output
-                # 'deepgram': str(deepgram_output)
+                 # DEEPGRAM: Commenting out Deepgram output
+                 # 'deepgram': str(deepgram_output)
             }
         }
         
