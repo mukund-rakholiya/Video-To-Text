@@ -18,9 +18,9 @@ CONFIG = {
 
 async def run_transcription():
     try:
-         # DEEPGRAM: Commenting out API key validation
-         # if not CONFIG["deepgram_api_key"]:
-         #     raise ValueError("DEEPGRAM_API_KEY not found in .env file")
+        # DEEPGRAM: Commenting out API key validation
+        # if not CONFIG["deepgram_api_key"]:
+        #     raise ValueError("DEEPGRAM_API_KEY not found in .env file")
             
         # Ensure video file exists
         if not os.path.exists(CONFIG["video_path"]):
