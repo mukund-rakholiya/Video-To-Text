@@ -31,8 +31,6 @@ async def run_transcription():
         
         result = await process_video(
             video_path=CONFIG["video_path"],
-            # DEEPGRAM: Commenting out API key
-            # deepgram_api_key=CONFIG["deepgram_api_key"],
             whisper_model=CONFIG["whisper_model"],
             output_dir=CONFIG["output_dir"],
             audio_format=CONFIG["audio_format"]
