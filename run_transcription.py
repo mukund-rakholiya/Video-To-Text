@@ -42,8 +42,6 @@ async def run_transcription():
         print("\nOutput files:")
         print(f"- Audio: {result['output_files']['audio']}")
         print(f"- Whisper transcription: {result['output_files']['whisper']}")
-        # DEEPGRAM: Commenting out Deepgram output
-        # print(f"- Deepgram transcription: {result['output_files']['deepgram']}")
         
         # Print sample of transcriptions
         print("\nWhisper Transcription (first 100 characters):")
