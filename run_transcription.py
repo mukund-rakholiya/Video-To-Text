@@ -18,7 +18,6 @@ CONFIG = {
 
 async def run_transcription():
     try:
-                    
         # Ensure video file exists
         if not os.path.exists(CONFIG["video_path"]):
             raise FileNotFoundError(f"Video file not found: {CONFIG['video_path']}")
