@@ -49,10 +49,6 @@ async def run_transcription():
         print("\nWhisper Transcription (first 100 characters):")
         print(result['whisper']['text'][:100] + "...")
         
-        # DEEPGRAM: Commenting out Deepgram sample
-        # print("\nDeepgram Transcription (first 100 characters):")
-        # print(result['deepgram']['text'][:100] + "...")
-        
     except Exception as e:
         print(f"Error: {str(e)}")
 
