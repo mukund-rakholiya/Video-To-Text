@@ -1,6 +1,6 @@
-import asyncio
 from dotenv.main import load_dotenv
 from main import process_video
+import asyncio
 import os
 
 # Load environment variables
