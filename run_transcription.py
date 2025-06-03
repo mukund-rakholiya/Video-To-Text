@@ -4,7 +4,7 @@ import os
 from dotenv.main import load_dotenv
 
 # Load environment variables
-load_dotenv()
+load_dotenv() 
 
 # Configuration
 CONFIG = {
@@ -12,8 +12,8 @@ CONFIG = {
     "whisper_model": "base",  # Options: tiny, base, small, medium, large
     "output_dir": "transcriptions",
     "audio_format": "wav"
-}
-
+} 
+ 
 async def run_transcription():
     try:
         # Ensure video file exists
