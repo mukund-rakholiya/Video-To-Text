@@ -6,14 +6,15 @@ import os
 # Load environment variables
 load_dotenv() 
 
-# Configuration 
-CONFIG = { 
-     "video_path": "videos/demo_tense.mp4",  # Replace with your video path
-     "whisper_model": "base",  # Options: tiny, base, small,large, medium
-     "output_dir": "transcriptions",
-     "audio_format": "wav"
-}
-
+# Configuration
+CONFIG = {
+    "video_path": "videos/demo_tense.mp4",  # Replace with your video path
+    "whisper_model": "base",  # Options: tiny, base, small,large, medium 
+    "output_dir": "transcriptions",
+    "audio_format": "wav"
+} 
+ 
+main
 async def run_transcription():
     try:
         # Ensure video file exists
