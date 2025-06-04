@@ -13,8 +13,7 @@ CONFIG = {
     "output_dir": "transcriptions",
     "audio_format": "wav"
 } 
- 
-main
+
 async def run_transcription():
     try:
         # Ensure video file exists
