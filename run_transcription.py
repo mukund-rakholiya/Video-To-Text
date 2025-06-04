@@ -31,7 +31,7 @@ async def run_transcription():
         )
         
         print("\nTranscription completed successfully!")
-        print("\nOutput files:")
+        print("\nOutput files: ")
         print(f"- Audio: {result['output_files']['audio']}")
         print(f"- Whisper transcription: {result['output_files']['whisper']}")
         
