@@ -20,8 +20,8 @@ async def run_transcription():
         if not os.path.exists(CONFIG["video_path"]):
             raise FileNotFoundError(f"Video file not found: {CONFIG['video_path']}")
             
-        print(f"Starting transcription for: {CONFIG['video_path']}")
         print(f"Output will be saved to: {CONFIG['output_dir']}")
+        print(f"Starting transcription for: {CONFIG['video_path']}")
         
         result = await process_video(
             video_path=CONFIG["video_path"],
