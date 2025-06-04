@@ -30,7 +30,7 @@ async def run_transcription():
             audio_format=CONFIG["audio_format"]
         )
         
-        print("\nTranscription completed successfully!")
+        print("\nTranscription completed successfully! ")
         print("\nOutput files: ")
         print(f"- Audio: {result['output_files']['audio']}")
         print(f"- Whisper transcription: {result['output_files']['whisper']}")
