@@ -43,4 +43,4 @@ async def run_transcription():
         print(f"Error: {str(e)}")
 
 if __name__ == "__main__":
-    asyncio.run(run_transcription()) 
+    asyncio.run(run_transcription())  
