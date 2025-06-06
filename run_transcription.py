@@ -1,5 +1,5 @@
-from dotenv.main import load_dotenv
 from main import process_video
+from dotenv.main import load_dotenv
 import asyncio
 import os
 
@@ -13,15 +13,15 @@ CONFIG = {
     "output_dir": "transcriptions",
     "audio_format": "wav"
 } 
- 
+
 async def run_transcription():
     try:
         # Ensure video file exists
         if not os.path.exists(CONFIG["video_path"]):
             raise FileNotFoundError(f"Video file not found: {CONFIG['video_path']}")
             
-        print(f"Starting transcription for: {CONFIG['video_path']}")
         print(f"Output will be saved to: {CONFIG['output_dir']}")
+        print(f"Starting transcription for: {CONFIG['video_path']}")
         
         result = await process_video(
             video_path=CONFIG["video_path"],
@@ -30,8 +30,8 @@ async def run_transcription():
             audio_format=CONFIG["audio_format"]
         )
         
-        print("\nTranscription completed successfully!")
-        print("\nOutput files:")
+        print("\nTranscription completed successfully! ")
+        print("\nOutput files: ")
         print(f"- Audio: {result['output_files']['audio']}")
         print(f"- Whisper transcription: {result['output_files']['whisper']}")
         
@@ -43,4 +43,4 @@ async def run_transcription():
         print(f"Error: {str(e)}")
 
 if __name__ == "__main__":
-    asyncio.run(run_transcription()) 
+    asyncio.run(run_transcription())  
