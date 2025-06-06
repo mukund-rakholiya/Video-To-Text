@@ -1,7 +1,7 @@
-# DEEPGRAM: Commenting out Deepgram import
-# from transcribers import transcribe_audio, transcribe_audio_deepgram
 import asyncio
 from pathlib import Path
+# DEEPGRAM: Commenting out Deepgram import
+# from transcribers import transcribe_audio, transcribe_audio_deepgram
 from transcribers import transcribe_audio
 from utils import extract_audio_from_video
 import os
@@ -24,8 +24,8 @@ async def process_video(
         video_path (str): Path to the video file
         deepgram_api_key (str): Deepgram API key (optional if set in .env) # DEEPGRAM: Kept for documentation
         whisper_model (str): Whisper model to use
-        output_dir (str): Directory to save transcriptions
         audio_format (str): Format for extracted audio (wav or mp3)
+        output_dir (str): Directory to save transcriptions
         
     Returns:
         dict: Dictionary containing transcriptions
