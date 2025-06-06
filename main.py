@@ -52,6 +52,13 @@ async def process_video(
         
         print("Starting transcription process...")
         
+        # Run Whisper transcription
+        whisper_result = transcribe_audio(
+            extracted_audio,
+            model_name=whisper_model,
+            verbose=True
+        )
+        
         # DEEPGRAM: Commenting out Deepgram transcription
         # deepgram_result = await transcribe_audio_deepgram(
         #     extracted_audio,
@@ -59,13 +66,6 @@ async def process_video(
         #     smart_format=True,
         #     diarize=True
         # )
-
-        # Run Whisper transcription
-        whisper_result = transcribe_audio(
-            extracted_audio,
-            model_name=whisper_model,
-            verbose=True
-        )
         
         # Save transcriptions to files
         whisper_output = output_path / f"{video_name}_whisper.txt"
