@@ -96,9 +96,8 @@ async def process_video(
                 os.unlink(extracted_audio)
             if 'whisper_output' in locals() and whisper_output.exists():
                 os.unlink(whisper_output)
-            # DEEPGRAM: Commenting out Deepgram cleanup
-            # if 'deepgram_output' in locals() and deepgram_output.exists():
-            #     os.unlink(deepgram_output)
+            if 'deepgram_output' in locals() and deepgram_output.exists():
+                os.unlink(deepgram_output)
         except:
             pass
         raise Exception(f"Video processing failed: {str(e)}")
