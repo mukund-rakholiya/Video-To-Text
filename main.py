@@ -120,8 +120,7 @@ async def main():
         print("\nTranscription completed successfully!")
         print(f"Audio file: {result['output_files']['audio']}")
         print(f"Whisper transcription: {result['output_files']['whisper']}")
-        # DEEPGRAM: Commenting out Deepgram output
-        # print(f"Deepgram transcription: {result['output_files']['deepgram']}")
+        print(f"Deepgram transcription: {result['output_files']['deepgram']}")
         
     except Exception as e:
         print(f"Error: {str(e)}")
