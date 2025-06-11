@@ -71,10 +71,9 @@ async def process_video(
         with open(whisper_output, 'w', encoding='utf-8') as f:
             f.write(whisper_result['text'])
             
-        # DEEPGRAM: Commenting out Deepgram file saving
-        # deepgram_output = output_path / f"{video_name}_deepgram.txt"
-        # with open(deepgram_output, 'w', encoding='utf-8') as f:
-        #     f.write(deepgram_result['text'])
+        deepgram_output = output_path / f"{video_name}_deepgram.txt"
+        with open(deepgram_output, 'w', encoding='utf-8') as f:
+            f.write(deepgram_result['text'])
             
         # Clean up extracted audio if it's not in the output directory
         if not str(extracted_audio).startswith(str(output_path)):
