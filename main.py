@@ -12,7 +12,7 @@ load_dotenv()
 
 async def process_video(
     video_path: str,
-    deepgram_api_key: str = None,  # DEEPGRAM: Kept for future use
+    deepgram_api_key: str = None, 
     whisper_model: str = "base",
     output_dir: str = "transcriptions",
     audio_format: str = "wav"
@@ -31,10 +31,10 @@ async def process_video(
         dict: Dictionary containing transcriptions
     """
     try:
-        # DEEPGRAM: Commenting out API key validation
-        # api_key = deepgram_api_key or os.getenv("DEEPGRAM_API_KEY")
-        # if not api_key:
-        #     raise ValueError("Deepgram API key not found in parameters or environment variables")
+        DEEPGRAM: Commenting out API key validation
+        api_key = deepgram_api_key or os.getenv("DEEPGRAM_API_KEY")
+        if not api_key:
+            raise ValueError("Deepgram API key not found in parameters or environment variables")
 
         # Create output directory if it doesn't exist
         output_path = Path(output_dir)
