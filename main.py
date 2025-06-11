@@ -59,13 +59,12 @@ async def process_video(
             verbose=True
         )
         
-        # DEEPGRAM: Commenting out Deepgram transcription
-        # deepgram_result = await transcribe_audio_deepgram(
-        #     extracted_audio,
-        #     api_key=api_key,
-        #     smart_format=True,
-        #     diarize=True
-        # )
+        deepgram_result = await transcribe_audio_deepgram(
+            extracted_audio,
+            api_key=api_key,
+            smart_format=True,
+            diarize=True
+        )
         
         # Save transcriptions to files
         whisper_output = output_path / f"{video_name}_whisper.txt"
